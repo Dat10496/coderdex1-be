@@ -42,13 +42,15 @@ router.get("/", function (req, res, next) {
       });
     } else if (filterKeys.includes("types")) {
       filterValue.forEach((condition) => {
-        result = data.filter((pokemon) => pokemon["types"].includes(condition));
+        result = result.length
+          ? result.filter((pokemon) => pokemon.name === filterValue[1])
+          : data.filter((pokemon) => pokemon["types"].includes(condition));
       });
     } else {
       result = data;
     }
 
-    let count = db.totalPokemons;
+    let count = result.length;
     let totalPokemons = db.totalPokemons;
     result = result.slice(offset, offset + limit);
 
