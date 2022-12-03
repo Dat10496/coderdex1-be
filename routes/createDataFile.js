@@ -20,7 +20,9 @@ const createData = async () => {
         weight: `${pokemon.weight_kg} .lbs`,
         abilities: pokemon.abilities,
         types: [pokemon.type1, pokemon.type2],
-        url: `https://pokemondex-be.herokuapp.com/images/${index + 1}.jpg`,
+        url: `https://coderdex1-be-production.up.railway.app/images/${
+          index + 1
+        }.jpg`,
       };
     } else {
       return {
@@ -30,7 +32,9 @@ const createData = async () => {
         weight: `${pokemon.weight_kg} .lbs`,
         abilities: pokemon.abilities,
         types: [pokemon.type1],
-        url: `https://pokemondex-be.herokuapp.com/images/${index + 1}.jpg`,
+        url: `https://coderdex1-be-production.up.railway.app/images/${
+          index + 1
+        }.jpg`,
       };
     }
   });
