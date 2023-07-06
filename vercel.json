@@ -6,7 +6,7 @@
             "user": "@vercel/node"
         }
     ],
-    "ruotes": [
+    "routes": [
         {
             "src": "/(.*)",
             "dest": "/"
