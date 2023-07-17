@@ -40,6 +40,8 @@ const createData = async () => {
   data.data = newData;
 
   fs.writeFileSync("../db.json", JSON.stringify(data));
+
+  console.log("done");
 };
 
 createData();

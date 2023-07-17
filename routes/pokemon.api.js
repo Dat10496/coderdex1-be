@@ -50,6 +50,12 @@ router.get("/", function (req, res, next) {
       result = data;
     }
 
+    if (!result.length) {
+      const err = new Error("Pokemon not found");
+      err.statusCode = 401;
+      throw err;
+    }
+
     let count = result.length;
     let totalPokemons = db.totalPokemons;
     result = result.slice(offset, offset + limit);
@@ -66,7 +72,7 @@ router.get("/:pokemonId", (req, res, next) => {
   try {
     const { pokemonId } = req.params;
 
-    if (pokemonId < 1 || pokemonId > 721) {
+    if (pokemonId < 1) {
       const err = new Error("Pokemon not found");
       err.statusCode = 401;
       throw err;
@@ -147,11 +153,11 @@ router.post("/", (req, res, next) => {
       err.statusCode = 401;
       throw err;
     } else if (notAllowName.length) {
-      const err = new Error("Name is already");
+      const err = new Error("Duplicate Name");
       err.statusCode = 401;
       throw err;
     } else if (notAllowId.length) {
-      const err = new Error("Id is already");
+      const err = new Error("Duplicate Id");
       err.statusCode = 401;
       throw err;
     }
