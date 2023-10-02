@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
-const readPokemon = require("../utils/readPokemon");
 const path = require("path");
+
+//Find the absolute path of the json directory
+const jsonDirectory = path.join(process.cwd(), "db.json");
 
 router.get("/", async function (req, res, next) {
   const allowedFilter = ["types", "name", "page", "limit"];
@@ -27,11 +29,8 @@ router.get("/", async function (req, res, next) {
     let offset = limit * (page - 1);
 
     let result = [];
-    const jsonDirectory = path.join(process.cwd(), "db.json");
 
     const db = JSON.parse(fs.readFileSync(jsonDirectory, "utf-8"));
-    // const db = await readPokemon();
-    // console.log(db, "db");
 
     const { data } = db;
 
@@ -83,7 +82,7 @@ router.get("/:pokemonId", (req, res, next) => {
       throw err;
     }
 
-    const db = JSON.parse(fs.readFileSync("db.json", "utf-8"));
+    const db = JSON.parse(fs.readFileSync(jsonDirectory, "utf-8"));
     const { data } = db;
     let result;
 
@@ -134,7 +133,7 @@ router.post("/", (req, res, next) => {
     "water",
   ];
   try {
-    let db = JSON.parse(fs.readFileSync("db.json", "utf-8"));
+    let db = JSON.parse(fs.readFileSync(jsonDirectory, "utf-8"));
     const { data } = db;
 
     const { name, url, types, id } = req.body;
@@ -212,7 +211,7 @@ router.put("/:pokemonId", (req, res, next) => {
   const allowUpdate = ["name", "types", "url"];
 
   try {
-    const db = JSON.parse(fs.readFileSync("db.json", "utf-8"));
+    const db = JSON.parse(fs.readFileSync(jsonDirectory, "utf-8"));
     const { data } = db;
     const { pokemonId } = req.params;
     const { name, types } = req.body;
@@ -266,7 +265,7 @@ router.delete("/:pokemonId", (req, res, next) => {
   try {
     const { pokemonId } = req.params;
 
-    const db = JSON.parse(fs.readFileSync("db.json", "utf-8"));
+    const db = JSON.parse(fs.readFileSync(jsonDirectory, "utf-8"));
     const { data } = db;
 
     const targetIndex = data.findIndex((pokemon) => pokemon.id === pokemonId);
