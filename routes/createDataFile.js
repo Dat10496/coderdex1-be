@@ -20,7 +20,7 @@ const createData = async () => {
         weight: `${pokemon.weight_kg} .lbs`,
         abilities: pokemon.abilities,
         types: [pokemon.type1, pokemon.type2],
-        url: `https://pokedex-be.onrender.com/images/${index + 1}.jpg`,
+        url: `/images/${index + 1}.jpg`,
       };
     } else {
       return {
@@ -30,7 +30,7 @@ const createData = async () => {
         weight: `${pokemon.weight_kg} .lbs`,
         abilities: pokemon.abilities,
         types: [pokemon.type1],
-        url: `https://pokedex-be.onrender.com/images/${index + 1}.jpg`,
+        url: `/images/${index + 1}.jpg`,
       };
     }
   });
