@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
+const readPokemon = require("../utils/readPokemon");
+const path = require("path");
 
-router.get("/", function (req, res, next) {
+router.get("/", async function (req, res, next) {
   const allowedFilter = ["types", "name", "page", "limit"];
 
   try {
@@ -25,8 +27,11 @@ router.get("/", function (req, res, next) {
     let offset = limit * (page - 1);
 
     let result = [];
+    const jsonDirectory = path.join(process.cwd(), "db.json");
 
-    const db = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
+    const db = JSON.parse(fs.readFileSync(jsonDirectory, "utf-8"));
+    // const db = await readPokemon();
+    // console.log(db, "db");
 
     const { data } = db;
 
