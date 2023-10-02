@@ -26,7 +26,7 @@ router.get("/", function (req, res, next) {
 
     let result = [];
 
-    const db = JSON.parse(fs.readFileSync("db.json", "utf-8"));
+    const db = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
 
     const { data } = db;
 
